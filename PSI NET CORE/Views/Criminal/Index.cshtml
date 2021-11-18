@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PSI_NET_CORE.Models.Criminal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="Criminaltb">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassPortNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CrimeDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#Criminaltb").DataTable({
+                "ajax": {
+                    "url": "/Criminal/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "nationalID" },
+                    { "data": "passPortNo" },
+                    { "data": "prime" },
+                    { "data": "description" },
+                    { "data": "crimeDate" }
+                ],
+                "language": {
+                    "emptyTable": "No data Found, Please click on <b> Add New </b> Button"
+                }
+
+            });
+
+        });
+
+    </script>
+}

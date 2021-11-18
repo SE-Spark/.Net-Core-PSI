@@ -1,0 +1,70 @@
+﻿@model IEnumerable<PSI_NET_CORE.Models.Work>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddorEdit","Citizen")')"><i class="fa fa-plus"></i> Add New</a>
+
+<table id="Work-tb" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    <script>
+
+        var Popup, dataTable;
+        $(document).ready(function () {
+            dataTable= $("#Work-tb").DataTable({
+                "ajax": {
+                    "url": "/Work/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "name" },
+                    {"data":"id" , "render" : function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("Create","Work")/" + data + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"150px"
+                    }
+                ],                   
+                "language": {
+                    "emptyTable": "No data Found, Please click on <b> Add New </b> Button"
+                }
+            });
+
+        });
+        //deletion
+         function Delete(id) {
+            if(confirm('Are You Sure to Delete this Employee Record ?'))
+            {
+                 $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete","Work")/' + id,
+                    success: function (data) {
+                        if (data.success)
+                        {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            });
+
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+}

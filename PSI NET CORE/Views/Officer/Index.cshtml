@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PSI_NET_CORE.Models.Officer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="Officertb" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateEmployed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#Officertb").DataTable({
+                "ajax": {
+                    "url": "/Officer/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "firstName" },
+                    { "data": "lastName" },
+                    { "data": "nationalID" },
+                    { "data": "postId" },
+                    { "data": "workId" },
+                    { "data": "dateEmployed" }
+                ],
+                "language": {
+                    "emptyTable": "No data Found, Please click on <b> Add New </b> Button"
+                }
+
+
+            });
+
+        });
+
+    </script>
+}

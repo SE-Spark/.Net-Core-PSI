@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PSI_NET_CORE.Models.Station>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="Stationtb" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StationNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ward)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#Stationtb").DataTable({
+                "ajax": {
+                    "url": "/Station/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "stationNo" },
+                    { "data": "same" },
+                    { "data": "location" },
+                    { "data": "subLocation" },
+                    { "data": "ward" },
+                    { "data": "county" }
+                ]
+
+            });
+
+        });
+
+    </script>
+}
