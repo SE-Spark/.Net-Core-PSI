@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1684
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSI NET CORE", "PSI NET CORE\PSI NET CORE.csproj", "{8E80A161-0334-447B-8C6B-78D372A3C70A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E80A161-0334-447B-8C6B-78D372A3C70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E80A161-0334-447B-8C6B-78D372A3C70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E80A161-0334-447B-8C6B-78D372A3C70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E80A161-0334-447B-8C6B-78D372A3C70A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A34979A-5F09-4431-8A2B-3E2906E5A019}
+	EndGlobalSection
+EndGlobal
