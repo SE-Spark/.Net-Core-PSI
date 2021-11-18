@@ -7,6 +7,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Foreigner
     {
+        public String Id { get; set; }
         [Required(ErrorMessage = "Firstname is required")]
         [DataType(DataType.Text)]
         [Display(Name = "First Name")]

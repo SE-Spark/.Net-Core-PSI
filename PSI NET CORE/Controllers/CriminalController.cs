@@ -14,11 +14,11 @@ namespace PSI_NET_CORE.Controllers
         private UnitOfWork unit = new UnitOfWork();
         public IActionResult Index()
         {
-            return View(unit.CriminalRepository.get());
+            return View();
         }
-        public ActionResult GetData()
+        public async Task<ActionResult> GetData()
         {
-            return Json(new { data = unit.CriminalRepository.get() });
+            return Json(new { data = await unit.CriminalRepository.get() });
         }
         public IActionResult Create()
         {

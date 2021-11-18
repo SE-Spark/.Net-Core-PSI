@@ -7,6 +7,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Station
     {
+        public Guid Id { get; set; }
         [DataType(DataType.Text)]
         [Display(Name = "Station Code")]
         [Required(ErrorMessage = "Station Code is required")]

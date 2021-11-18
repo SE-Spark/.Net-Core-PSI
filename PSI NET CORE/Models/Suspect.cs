@@ -7,6 +7,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Suspect
     {
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "National ID is required")]
         [DataType(DataType.Text)]
         [Display(Name = "National ID")]

@@ -11,7 +11,7 @@ namespace PSI_NET_CORE.Network.Repo
     {
         private BaseRepository<CitizenDto> citizenRepository;
         private BaseRepository<Criminal> criminalRepository;
-        private BaseRepository<Foreigner> courseRepository;
+        private BaseRepository<ForeignerDto> courseRepository;
         private BaseRepository<Login> loginRepository;
         private BaseRepository<Officer> officerRepository;
         private BaseRepository<Station> stationRepository;
@@ -41,14 +41,14 @@ namespace PSI_NET_CORE.Network.Repo
                 return criminalRepository;
             }
         }
-        public BaseRepository<Foreigner> ForeignerRepository
+        public BaseRepository<ForeignerDto> ForeignerRepository
         {
             get
             {
 
                 if (this.courseRepository == null)
                 {
-                    this.courseRepository = new BaseRepository<Foreigner>(Constants.URL_FOREIGNER);
+                    this.courseRepository = new BaseRepository<ForeignerDto>(Constants.URL_FOREIGNER);
                 }
                 return courseRepository;
             }

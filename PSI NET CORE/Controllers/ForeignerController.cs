@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSI_NET_CORE.Network.Mappers;
 using PSI_NET_CORE.Network.Repo;
 
 namespace PSI_NET_CORE.Controllers
@@ -13,11 +14,14 @@ namespace PSI_NET_CORE.Controllers
         private UnitOfWork unit = new UnitOfWork();
         public ActionResult Index()
         {
-            return View(unit.ForeignerRepository.get());
+            return View();
         }
-        public ActionResult GetData()
+        public async Task<ActionResult> GetData()
         {
-            return Json(new { data = unit.ForeignerRepository.get() });
+            var data = await unit.ForeignerRepository.get();
+            ForeignerMapper mapper = new ForeignerMapper();
+           var foreigners= mapper.MapToDomainList(data);
+            return Json(new { data = foreigners });
         }
         public ActionResult Create()
         {
