@@ -1,0 +1,122 @@
+﻿@model IEnumerable<PSI_NET_CORE.Models.Citizen>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="citizen" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ward)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+ @section Scripts{
+     <script>
+         var table;
+         $(document).ready(function () {
+             table = $("#citizen").DataTable({
+                 "ajax": {
+                    "url": "/Citizen/GetData",
+                    "type": "GET",
+                    "datatype": "json" 
+                 },
+                 columns: [
+                     {
+                         data: "firstName"
+                     },
+                     {
+                         data: "lastName"
+                     },
+                     {
+                         data: "nationalID"
+                     },
+                     {
+                         data: "location"
+                     },
+                     {
+                         data: "subLocation"
+                     },
+                     {
+                         data: "ward"
+                     },
+                     {
+                         data: "county"
+                     },
+                     {
+                         data: "Edit",
+                         render: function (data, type, citizen) {
+                             return "<a class= 'btn btn-link' href='/citizen/edit/" + citizen.id + "'>Edit</a> "
+                         }                            
+                     },
+                     {
+                         data: "id",
+                         render: function (data) {
+                             return "<button class='btn btn-link js-delete' data-citizen-id="+data+">Delete</button>"
+                         }
+                     }
+
+                 ]
+
+             });
+
+         });
+
+         $("#citizen").on("click", ".js-delete", function () {
+             var button = $(this);
+             bootbox.confirm("Are you sure you want to delete?", function (result) {
+                 if (result) {
+                     $.ajax({
+                         url: "/Citizen/Delete/" + button.attr("data-citizen-id"),
+                         method: "POST",
+                         success: function (data) {
+                             if (data.success) {
+                                 table.row(button.parents("tr")).remove().draw();
+                                 $.notify(data.message, {
+                                     globalPosition: "top center",
+                                     className: "success"
+                                 })
+                             }
+                             else {
+                                 $.notify(data.message, {
+                                     globalPosition: "top center",
+                                     className: "alert-info"
+                                 })
+                             }
+                         }
+                     });
+                 }
+
+             });
+         });
+     </script>
+     
+     }
