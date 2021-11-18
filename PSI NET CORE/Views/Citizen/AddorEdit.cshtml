@@ -1,0 +1,49 @@
+﻿@model PSI_NET_CORE.Models.Citizen
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Citizen", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NationalID, new { @class = "control-label" })
+        @Html.EditorFor(model => model.NationalID, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.NationalID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Location, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Location)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SubLocation, new { @class = "control-label" })
+        @Html.EditorFor(model => model.SubLocation, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.SubLocation)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ward, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Ward, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Ward)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.County, new { @class = "control-label" })
+        @Html.EditorFor(model => model.County, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.County)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        <input type="reset" value="Reset" class="btn" />
+    </div>
+}

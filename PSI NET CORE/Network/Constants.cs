@@ -19,7 +19,7 @@ namespace PSI_NET_CORE.Network
         public const String URL_WORK = "/wk/";
         //general
         public const String URL_DELETE = "delete/";
-        public const String URL_UPDATE = "update/";
+        public const String URL_UPDATE = "edit/";
         public const String URL_INSERT = "add";
     }
 }
