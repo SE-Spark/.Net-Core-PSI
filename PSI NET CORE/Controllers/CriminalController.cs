@@ -24,21 +24,44 @@ namespace PSI_NET_CORE.Controllers
             var result = mapper.MapToDomainList(data);
             return Json(new { data = result });
         }
-       
-        public IActionResult Edit(object id)
+
+        [HttpGet]
+        public IActionResult CreateUpdate(string id)
         {
-            return View();
+            if (String.IsNullOrEmpty(id))
+                return View(new Criminal());
+
+            var data = unit.CriminalRepository.get(Guid.Parse(id));
+            var res = mapper.MapToDomain(data);
+            return View(res);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(IFormCollection collection)
+        public IActionResult CreateUpdate(Criminal t)
         {
-            return View();
+            var input = mapper.MapToDto(t);
+            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                var output = unit.CriminalRepository.insert(input);
+                if (output == 1)
+                    return Json(new { success = true, message = "Added Successfully" }, new Newtonsoft.Json.JsonSerializerSettings());
+                return Json(new { success = false, message = "process failed" }, new Newtonsoft.Json.JsonSerializerSettings());
+            }
+            else
+            {
+                var output = unit.CriminalRepository.update(input.Id, input);
+                if (output == 1)
+                    return Json(new { success = true, message = "Updated Successfully" }, new Newtonsoft.Json.JsonSerializerSettings());
+                return Json(new { success = false, message = "process failed" }, new Newtonsoft.Json.JsonSerializerSettings());
+            }
         }
+
         [HttpPost]
         public IActionResult Delete(String id)
         {
-            return View();
+            var result = unit.CriminalRepository.delete(Guid.Parse(id));
+            if (result == 1)
+                return Json(new { success = true, message = "Deleted SuccessFully" }, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(new { success = false, message = "Deletion failed" }, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }
