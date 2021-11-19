@@ -7,12 +7,12 @@
 @using (Html.BeginForm("CreateUpdate", "Work", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.Id)
-    <div class="md-form md-outline">
+    <div class="form-group md-outline">
         <input type="email" id="defaultForm-email1" class="form-control">
         <label data-error="wrong" data-success="right" for="defaultForm-email1">Your email</label>
         @Html.ValidationMessageFor(model => model.Name)
     </div>
-    <div class="text-center pb-2">
+    <div class="form-grouptext-center pb-2">
 
         <button type="submit" class="btn btn-primary mb-4">Save</button>
 
