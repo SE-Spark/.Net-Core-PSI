@@ -35,8 +35,9 @@
 @section Scripts {
 
     <script>
+        var dataTable, Popup;
         $(document).ready(function () {
-            $("#Criminaltb").DataTable({
+            dataTable= $("#Criminaltb").DataTable({
                 "ajax": {
                     "url": "/Criminal/GetData",
                     "type": "GET",
@@ -47,7 +48,14 @@
                     { "data": "passPortNo" },
                     { "data": "prime" },
                     { "data": "description" },
-                    { "data": "crimeDate" }
+                    { "data": "crimeDate" },
+                    {"data":"id" , "render" : function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("CreateUpdate", "Criminal")/" + data + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm js-delete' data-citizen-id=" + data + " style='margin-left:5px'><i class='fa fa-trash'></i> Delete</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"150px"
+                    }
                 ],
                 "language": {
                     "emptyTable": "No data Found, Please click on <b> Add New </b> Button"
@@ -57,5 +65,85 @@
 
         });
 
+        //update/Edit popup
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Fill Criminal Details',
+                        height: 500,
+                        width: 700,
+                        background: '#808080',
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+        //update/insert form submission
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            table.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                        else {
+                            Popup.dialog('close');
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "danger"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+        //deletion
+        $("#Criminaltb").on("click", ".js-delete", function () {
+            var button = $(this);
+            bootbox.confirm("Are you sure you want to delete?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/Criminal/Delete/" + button.attr("data-citizen-id"),
+                        method: "POST",
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.row(button.parents("tr")).remove().draw();
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                });
+                            }
+                            else {
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "alert-info"
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+        });
     </script>
 }

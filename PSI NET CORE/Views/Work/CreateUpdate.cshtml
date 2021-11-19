@@ -4,7 +4,7 @@
 }
 
 <h5 class="text-center mt-1 mb-4">Work Manager</h5>
-@using (Html.BeginForm("Create", "Work", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("CreateUpdate", "Work", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.Id)
     <div class="md-form md-outline">
