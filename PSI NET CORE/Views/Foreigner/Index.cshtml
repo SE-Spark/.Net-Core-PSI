@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<PSI_NET_CORE.Models.Foreigner>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Foreigner";
 }
 
-<h1>Index</h1>
+<h1>Foreigner</h1>
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("CreateUpdate","Foreigner")')"><i class="fa fa-plus"></i> Add New</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table id="Foreignertb" class="table table-striped table-bordered">
     <thead>
         <tr>

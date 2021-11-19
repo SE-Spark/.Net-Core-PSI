@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<PSI_NET_CORE.Models.Criminal>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Criminal";
 }
 
-<h1>Index</h1>
+<h1>Criminal</h1>
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("CreateUpdate","Criminal")')"><i class="fa fa-plus"></i> Add New</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table id="Criminaltb"class="table table-striped table-bordered" style="width:100%">
+<table id="Criminaltb" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>

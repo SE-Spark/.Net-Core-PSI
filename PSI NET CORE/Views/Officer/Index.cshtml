@@ -1,15 +1,14 @@
 ﻿@model IEnumerable<PSI_NET_CORE.Models.Officer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Officer";
 }
 
-<h1>Index</h1>
+<h1>Officer</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table id="Officertb" class="table">
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("CreateUpdate","Officer")')"><i class="fa fa-plus"></i> Add New</a>
+
+<table id="Officertb" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>

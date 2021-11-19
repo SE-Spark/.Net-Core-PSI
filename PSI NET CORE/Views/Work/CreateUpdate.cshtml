@@ -1,18 +1,18 @@
 ﻿@model PSI_NET_CORE.Models.Work
 @{
-    ViewBag.Title = "Work List";
+    Layout = null;
 }
 
 <h5 class="text-center mt-1 mb-4">Work Manager</h5>
 @using (Html.BeginForm("CreateUpdate", "Work", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     @Html.HiddenFor(model => model.Id)
-    <div class="form-group md-outline">
-        <input type="email" id="defaultForm-email1" class="form-control">
-        <label data-error="wrong" data-success="right" for="defaultForm-email1">Your email</label>
-        @Html.ValidationMessageFor(model => model.Name)
-    </div>
-    <div class="form-grouptext-center pb-2">
+<div class="form-group">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+    <div class="text-center pb-2">
 
         <button type="submit" class="btn btn-primary mb-4">Save</button>
 

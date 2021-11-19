@@ -25,7 +25,7 @@ namespace PSI_NET_CORE.Controllers
             return Json(new { data = result});
         }
         [HttpGet]
-        public IActionResult CreateUpdate(string id)
+        public ActionResult CreateUpdate(string id)
         {
             if (String.IsNullOrEmpty(id))
                 return View(new Work());
@@ -35,7 +35,7 @@ namespace PSI_NET_CORE.Controllers
             return View(res);
         }
         [HttpPost]
-        public IActionResult CreateUpdate(Work t)
+        public ActionResult CreateUpdate(Work t)
         {
             var input=mapper.MapToDto(t);
             if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
@@ -55,7 +55,7 @@ namespace PSI_NET_CORE.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(String id)
+        public ActionResult Delete(String id)
         {
             var result = unit.WorkRepository.delete(Guid.Parse(id));
             if (result == 1)
