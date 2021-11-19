@@ -7,7 +7,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Criminal
     {
-        public Guid Id { get; set; }
+        public String Id { get; set; }
         [Required(ErrorMessage = "National ID is required")]
         [DataType(DataType.Text)]
         [Display(Name = "National ID")]

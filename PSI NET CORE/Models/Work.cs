@@ -7,7 +7,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Work
     {
-        public Guid Id { get; set; }
+        public String Id { get; set; }
         [Required(ErrorMessage = "Name is required")]
         [DataType(DataType.Text)]
         [Display(Name = "Name")]

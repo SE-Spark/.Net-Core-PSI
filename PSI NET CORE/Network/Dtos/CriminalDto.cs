@@ -7,6 +7,7 @@ namespace PSI_NET_CORE.Network.Dtos
 {
     public class CriminalDto
     {
+        public Guid Id { get; set; }
         public int NationalID { get; set; }
         
         public int PassPortNo { get; set; }

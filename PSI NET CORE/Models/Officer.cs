@@ -8,7 +8,7 @@ namespace PSI_NET_CORE.Models
 {
     public class Officer
     {
-        public Guid Id { get; set; }
+        public String Id { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]
         [DataType(DataType.Text)]

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PSI_NET_CORE.Models;
+using PSI_NET_CORE.Network.Mappers;
 using PSI_NET_CORE.Network.Repo;
 
 namespace PSI_NET_CORE.Controllers
@@ -12,34 +13,18 @@ namespace PSI_NET_CORE.Controllers
     public class CriminalController : Controller
     {
         private UnitOfWork unit = new UnitOfWork();
+        CriminalMapper mapper = new CriminalMapper();
         public IActionResult Index()
         {
             return View();
         }
         public async Task<ActionResult> GetData()
         {
-            return Json(new { data = await unit.CriminalRepository.get() });
+            var data = await unit.CriminalRepository.get();
+            var result = mapper.MapToDomainList(data);
+            return Json(new { data = result });
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
         public IActionResult Edit(object id)
         {
             return View();
@@ -50,13 +35,8 @@ namespace PSI_NET_CORE.Controllers
         {
             return View();
         }
-        public IActionResult Delete(object id)
-        {
-            return View();
-        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(String id)
         {
             return View();
         }

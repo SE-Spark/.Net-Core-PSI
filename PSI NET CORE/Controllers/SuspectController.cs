@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PSI_NET_CORE.Network.Mappers;
 using PSI_NET_CORE.Network.Repo;
 
 namespace PSI_NET_CORE.Controllers
@@ -11,6 +12,7 @@ namespace PSI_NET_CORE.Controllers
     public class SuspectController : Controller
     {
         private UnitOfWork unit = new UnitOfWork();
+        SuspectMapper mapper = new SuspectMapper();
         public IActionResult Index()
         {
             return View();
@@ -18,7 +20,9 @@ namespace PSI_NET_CORE.Controllers
 
         public async Task<ActionResult> GetData()
         {
-            return Json(new { data = await unit.SuspectRepository.get() });
+            var data = await unit.SuspectRepository.get();
+            var result = mapper.MapToDomainList(data);
+            return Json(new { data =result});
         }
         public IActionResult Create()
         {

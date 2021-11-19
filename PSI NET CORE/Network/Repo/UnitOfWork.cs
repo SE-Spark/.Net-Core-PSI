@@ -10,13 +10,13 @@ namespace PSI_NET_CORE.Network.Repo
     public class UnitOfWork
     {
         private BaseRepository<CitizenDto> citizenRepository;
-        private BaseRepository<Criminal> criminalRepository;
+        private BaseRepository<CriminalDto> criminalRepository;
         private BaseRepository<ForeignerDto> courseRepository;
         private BaseRepository<Login> loginRepository;
-        private BaseRepository<Officer> officerRepository;
-        private BaseRepository<Station> stationRepository;
-        private BaseRepository<Suspect> suspectRepository;
-        private BaseRepository<Work> workRepository;
+        private BaseRepository<OfficerDto> officerRepository;
+        private BaseRepository<StationDto> stationRepository;
+        private BaseRepository<SuspectDto> suspectRepository;
+        private BaseRepository<WorkDto> workRepository;
 
         public BaseRepository<CitizenDto> CitizenRepository
         {
@@ -29,14 +29,14 @@ namespace PSI_NET_CORE.Network.Repo
                 return citizenRepository;
             }
         }
-        public BaseRepository<Criminal> CriminalRepository
+        public BaseRepository<CriminalDto> CriminalRepository
         {
             get
             {
 
                 if (this.criminalRepository == null)
                 {
-                    this.criminalRepository = new BaseRepository<Criminal>(Constants.URL_CRIMINAL);
+                    this.criminalRepository = new BaseRepository<CriminalDto>(Constants.URL_CRIMINAL);
                 }
                 return criminalRepository;
             }
@@ -53,50 +53,50 @@ namespace PSI_NET_CORE.Network.Repo
                 return courseRepository;
             }
         }
-        public BaseRepository<Officer> OfficerRepository
+        public BaseRepository<OfficerDto> OfficerRepository
         {
             get
             {
 
                 if (this.officerRepository == null)
                 {
-                    this.officerRepository = new BaseRepository<Officer>(Constants.URL_OFFICER);
+                    this.officerRepository = new BaseRepository<OfficerDto>(Constants.URL_OFFICER);
                 }
                 return officerRepository;
             }
         }
-        public BaseRepository<Station> StationRepository
+        public BaseRepository<StationDto> StationRepository
         {
             get
             {
 
                 if (this.stationRepository == null)
                 {
-                    this.stationRepository = new BaseRepository<Station>(Constants.URL_STATION);
+                    this.stationRepository = new BaseRepository<StationDto>(Constants.URL_STATION);
                 }
                 return stationRepository;
             }
         }
-        public BaseRepository<Suspect> SuspectRepository
+        public BaseRepository<SuspectDto> SuspectRepository
         {
             get
             {
 
                 if (this.suspectRepository == null)
                 {
-                    this.suspectRepository = new BaseRepository<Suspect>(Constants.URL_SUSPECT);
+                    this.suspectRepository = new BaseRepository<SuspectDto>(Constants.URL_SUSPECT);
                 }
                 return suspectRepository;
             }
         }
-        public BaseRepository<Work> WorkRepository
+        public BaseRepository<WorkDto> WorkRepository
         {
             get
             {
 
                 if (this.workRepository == null)
                 {
-                    this.workRepository = new BaseRepository<Work>(Constants.URL_WORK);
+                    this.workRepository = new BaseRepository<WorkDto>(Constants.URL_WORK);
                 }
                 return workRepository;
             }

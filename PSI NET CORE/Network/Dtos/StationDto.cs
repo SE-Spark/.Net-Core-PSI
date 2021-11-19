@@ -7,6 +7,7 @@ namespace PSI_NET_CORE.Network.Dtos
 {
     public class StationDto
     {
+        public Guid Id { get; set; }
         public int StationNo { get; set; }
         
         public String Name { get; set; }

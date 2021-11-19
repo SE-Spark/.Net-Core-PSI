@@ -4,17 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddorEdit","Citizen")')"><i class="fa fa-plus"></i> Add New</a>
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("Create","Work")')"><i class="fa fa-plus"></i> Add New</a>
 
-<table id="Work-tb" class="table">
+<table id="Work-tb"  class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th></th>
         </tr>
     </thead>
+    <tbody>
+    </tbody>
 </table>
 @section Scripts {
     <script>
@@ -30,7 +32,7 @@
                 "columns": [
                     { "data": "name" },
                     {"data":"id" , "render" : function (data) {
-                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("Create","Work")/" + data + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete("+data+")><i class='fa fa-trash'></i> Delete</a>";
+                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("Create","Work")/" + data + "')><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm js-delete' data-citizen-id=" + data + " style='margin-left:5px'><i class='fa fa-trash'></i> Delete</a>";
                     },
                         "orderable": false,
                         "searchable":false,
@@ -43,28 +45,54 @@
             });
 
         });
-        //deletion
-         function Delete(id) {
-            if(confirm('Are You Sure to Delete this Employee Record ?'))
-            {
-                 $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Delete","Work")/' + id,
-                    success: function (data) {
-                        if (data.success)
-                        {
-                            dataTable.ajax.reload();
+        //update/Edit popup
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
 
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            });
-
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Fill Work Details',
+                        height: 500,
+                        width: 700,
+                        background: '#808080',
+                        close: function () {
+                            Popup.dialog('destroy').remove();
                         }
-                    }
 
+                    });
                 });
-            }
         }
+        //deletion
+        $("#Work-tb").on("click", ".js-delete", function () {
+            var button = $(this);
+            bootbox.confirm("Are you sure you want to delete?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/Work/Delete/" + button.attr("data-citizen-id"),
+                        method: "POST",
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.row(button.parents("tr")).remove().draw();
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                });
+                            }
+                            else {
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "alert-info"
+                                });
+                            }
+                        }
+                    });
+                }
+
+            });
+        });
     </script>
 }
