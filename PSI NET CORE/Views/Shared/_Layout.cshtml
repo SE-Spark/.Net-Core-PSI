@@ -25,9 +25,10 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div id="wrapper">
-        @if (username!=null)
-        {
+    @if (username != null)
+    {
+        <div id="wrapper">
+
             <div id="sidebar-wrapper" class="navbar-dark bg-faded">
                 <ul class="sidebar-nav bg-faded">
                     <li class="sidebar-brand">
@@ -59,13 +60,12 @@
                     <li>
                         <a class="nav-link text-dark" asp-area="" asp-controller="Work" asp-action="Index"><i class="fa fa-diamond" style="font-size:26px;padding-right:8px;" aria-hidden="true"></i> Work</a>
                     </li>
-                    
+
                     <li>
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout"><i class="fa fa-mobile" style="font-size:26px;padding-right:8px;" aria-hidden="true"></i>Logout</a>
                     </li>
                 </ul>
             </div>
-        }
             <div class="container">
                 @if (!String.IsNullOrEmpty(username))
                 {
@@ -90,17 +90,26 @@
                     </header>
                     <partial name="_CookieConsentPartial" />
                 }
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
-                </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - PSI_NET_CORE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
             </div>
-        </footer>
-    </div>
+
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2021 - PSI_NET_CORE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
+    }
+    else
+    { 
+        <div class="container" id="loginPage">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
     <environment exclude="Development">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"

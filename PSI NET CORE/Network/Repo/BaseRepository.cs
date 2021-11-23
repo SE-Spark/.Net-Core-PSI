@@ -133,28 +133,27 @@ namespace PSI_NET_CORE.Network
             }
             return 0;
         }
-        public async Task<int> Validate(TEntity t)
+        public async Task<int> Validate(TEntity T)
         {
-            var url = Constants.BASE_URL + "validate/";
-            var code = 0;
-
-            await Task.Run(async () => {
+            var url = Constants.BASE_URL + "/lg/validate/";            
                 try
-                {
-                    HttpResponseMessage res = _client.GetAsync(url).Result;
+            {
+                string data = JsonConvert.SerializeObject(T);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage res = _client.PostAsync(url, content).Result;
                     if (res.IsSuccessStatusCode)
                     {
                         var results = res.Content.ReadAsStringAsync().Result;
-                        code = JsonConvert.DeserializeObject<int>(results);
+                        var code= JsonConvert.DeserializeObject<int>(results);
+                    return code;
                     }
                 }
                 catch (Exception ex)
                 {
                     await get();
                 }
-            });
 
-            return code;
+            return 0;
         }
     }
 }
