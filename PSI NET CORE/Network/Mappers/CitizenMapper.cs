@@ -51,23 +51,5 @@ namespace PSI_NET_CORE.Network.Mappers
                 County = ct.County
             };
         }
-        public List<Citizen> MapToDomainList(List<CitizenDto> Dtos)
-        {
-            var citizens = new List<Citizen>();
-            foreach (var dto in Dtos)
-            {
-               citizens.Add( MapToDomain(dto));
-            }
-            return citizens;
-        }
-        public List<CitizenDto> MapToDtoList(List<Citizen> domains)
-        {
-            var dtos = new List<CitizenDto>();
-            foreach(var domain in domains)
-            {
-                dtos.Add(MapToDto(domain));
-            }
-            return dtos;
-        }
     }
 }

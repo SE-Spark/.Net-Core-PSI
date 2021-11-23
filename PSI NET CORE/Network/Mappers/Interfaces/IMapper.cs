@@ -9,9 +9,6 @@ namespace PSI_NET_CORE.Network.Mappers
     {
         Dto MapToDto(DomainModel m);
         DomainModel MapToDomain(Dto t);
-        List<Dto> MapToDtoList(List<DomainModel> t);
-
-        List<DomainModel> MapToDomainList(List<Dto> t);
 
     }
 }

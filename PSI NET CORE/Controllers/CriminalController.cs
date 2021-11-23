@@ -16,13 +16,25 @@ namespace PSI_NET_CORE.Controllers
         CriminalMapper mapper = new CriminalMapper();
         public IActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
         public async Task<ActionResult> GetData()
         {
             var data = await unit.CriminalRepository.get();
-            var result = mapper.MapToDomainList(data);
-            return Json(new { data = result });
+            var lis = (from t in data select new Criminal {
+                Id = t.Id.ToString(),
+                NationalID = t.NationalID,
+                PassPortNo = t.PassPortNo,
+                Crime = t.Crime,
+                Description = t.Description,
+                CrimeDate = t.CrimeDate
+            }).ToList();
+            return Json(new { data = lis });
         }
 
         [HttpGet]
@@ -39,7 +51,7 @@ namespace PSI_NET_CORE.Controllers
         public IActionResult CreateUpdate(Criminal t)
         {
             var input = mapper.MapToDto(t);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 var output = unit.CriminalRepository.insert(input);
                 if (output == 1)

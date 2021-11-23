@@ -21,5 +21,7 @@ namespace PSI_NET_CORE.Network.Dtos
         public String Ward { get; set; }
         
         public String County { get; set; }
+
+        public List<CriminalDto> Criminals { get; set; }
     }
 }

@@ -21,15 +21,7 @@ namespace PSI_NET_CORE.Network.Mappers
                 AllegationDate=t.AllegationDate
             };
         }
-
-        public List<Suspect> MapToDomainList(List<SuspectDto> t)
-        {
-            var domain = new List<Suspect>();
-            foreach (var dto in t)
-                domain.Add(MapToDomain(dto));
-            return domain;
-        }
-
+        
         public SuspectDto MapToDto(Suspect t)
         {
             if(t.Id==null)
@@ -53,12 +45,5 @@ namespace PSI_NET_CORE.Network.Mappers
             };
         }
 
-        public List<SuspectDto> MapToDtoList(List<Suspect> t)
-        {
-            var dtos = new List<SuspectDto>();
-            foreach (var domain in t)
-                dtos.Add(MapToDto(domain));
-            return dtos;
-        }
     }
 }

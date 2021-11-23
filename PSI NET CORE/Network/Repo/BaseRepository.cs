@@ -105,7 +105,20 @@ namespace PSI_NET_CORE.Network
             }
             return 0;
         }
+        public int insertUser(TEntity T)
+        {
+            var url = Constants.BASE_URL + "lg/add";
+            string data = JsonConvert.SerializeObject(T);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage res = _client.PostAsync(url, content).Result;
 
+            if (res.IsSuccessStatusCode)
+            {
+                //result = JsonConvert.DeserializeObject<int>(res.Content.ReadAsStringAsync().Result);
+                return 1;
+            }
+            return 0;
+        }
         public int update(Guid Id,TEntity T)
         {
             var url = Constants.BASE_URL + END_POINT + Constants.URL_UPDATE;
@@ -119,6 +132,29 @@ namespace PSI_NET_CORE.Network
                 return 1;
             }
             return 0;
+        }
+        public async Task<int> Validate(TEntity t)
+        {
+            var url = Constants.BASE_URL + "validate/";
+            var code = 0;
+
+            await Task.Run(async () => {
+                try
+                {
+                    HttpResponseMessage res = _client.GetAsync(url).Result;
+                    if (res.IsSuccessStatusCode)
+                    {
+                        var results = res.Content.ReadAsStringAsync().Result;
+                        code = JsonConvert.DeserializeObject<int>(results);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await get();
+                }
+            });
+
+            return code;
         }
     }
 }

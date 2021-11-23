@@ -17,14 +17,27 @@ namespace PSI_NET_CORE.Controllers
         // GET: Citizen
         public ActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
         public async Task<ActionResult> GetData()
         {
             var data =await unit.CitizenRepository.get();
-            CitizenMapper mapper = new CitizenMapper();
-            var citizens=mapper.MapToDomainList(data);
-            return Json(new { data = citizens });
+            var lis = (from a in data select new Citizen {
+                Id=a.Id.ToString(),
+                FirstName=a.FirstName,
+                LastName=a.LastName,
+                NationalID=a.NationalID,
+                SubLocation=a.SubLocation,
+                Location=a.Location,
+                Ward=a.Ward,
+                County=a.County
+            }).ToList();
+            return Json(new { data = lis });
         }
         [HttpGet]
         public ActionResult AddorEdit(String id)
@@ -35,7 +48,7 @@ namespace PSI_NET_CORE.Controllers
             }
             else
             {
-                var data = unit.CitizenRepository.get(Guid.Parse(id));
+                var data = unit.CitizenRepository.get(Guid.Parse(id));               
                 CitizenMapper mapper = new CitizenMapper();
                 var citizen = mapper.MapToDomain(data);
                 return View(citizen);
@@ -46,7 +59,7 @@ namespace PSI_NET_CORE.Controllers
         {
             CitizenMapper mapper = new CitizenMapper();
             var input = mapper.MapToDto(ct);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(ct.Id))
             {
                 //insert
                 var output= unit.CitizenRepository.insert(input);

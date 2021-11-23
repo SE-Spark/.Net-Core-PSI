@@ -16,13 +16,25 @@ namespace PSI_NET_CORE.Controllers
         SuspectMapper mapper = new SuspectMapper();
         public IActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
 
         public async Task<ActionResult> GetData()
         {
             var data = await unit.SuspectRepository.get();
-            var result = mapper.MapToDomainList(data);
+            var result = (from t in data select new Suspect{
+                Id = t.Id.ToString(),
+                NationalID = t.NationalID,
+                PassPortNo = t.PassPortNo,
+                Allegation = t.Allegation,
+                Description = t.Description,
+                AllegationDate = t.AllegationDate
+            }).ToList();
             return Json(new { data =result});
         }
         [HttpGet]
@@ -39,7 +51,7 @@ namespace PSI_NET_CORE.Controllers
         public IActionResult CreateUpdate(Suspect t)
         {
             var input = mapper.MapToDto(t);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 var output = unit.SuspectRepository.insert(input);
                 if (output == 1)

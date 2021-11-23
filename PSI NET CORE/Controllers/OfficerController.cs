@@ -16,12 +16,26 @@ namespace PSI_NET_CORE.Controllers
         OfficerMapper mapper = new OfficerMapper();
         public IActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
         public async Task<ActionResult> GetData()
         {
             var data = await unit.OfficerRepository.get();
-            var result=mapper.MapToDomainList(data);
+            var result= (from t in data select new Officer
+            {
+                Id = t.Id.ToString(),
+                FirstName = t.FirstName,
+                LastName = t.LastName,
+                NationalID = t.NationalID,
+                PostId = t.PostId,
+                WorkId = t.WorkId,
+                DateEmployed = t.DateEmployed
+            }).ToList();
             return Json(new { data = result});
         }
         [HttpGet]
@@ -38,7 +52,7 @@ namespace PSI_NET_CORE.Controllers
         public IActionResult CreateUpdate(Officer t)
         {
             var input = mapper.MapToDto(t);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 var output = unit.OfficerRepository.insert(input);
                 if (output == 1)

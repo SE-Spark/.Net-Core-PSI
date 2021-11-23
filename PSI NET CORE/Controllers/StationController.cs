@@ -16,12 +16,26 @@ namespace PSI_NET_CORE.Controllers
         StationMapper mapper = new StationMapper();
         public IActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
         public async Task<ActionResult> GetData()
         {
             var data = await unit.StationRepository.get();
-            var result = mapper.MapToDomainList(data);
+            var result = (from t in data select new Station{
+
+                Id = t.Id.ToString(),
+                StationNo = t.StationNo,
+                Name = t.Name,
+                Location = t.Location,
+                SubLocation = t.SubLocation,
+                Ward = t.Ward,
+                County = t.County
+            }).ToList();
             return Json(new { data = result});
         }
         [HttpGet]
@@ -38,7 +52,7 @@ namespace PSI_NET_CORE.Controllers
         public IActionResult CreateUpdate(Station t)
         {
             var input = mapper.MapToDto(t);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 var output = unit.StationRepository.insert(input);
                 if (output == 1)

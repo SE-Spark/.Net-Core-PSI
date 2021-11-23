@@ -22,16 +22,7 @@ namespace PSI_NET_CORE.Network.Mappers
                 County=t.County
             };
         }
-
-        public List<Station> MapToDomainList(List<StationDto> t)
-        {
-            var domains = new List<Station>();
-            foreach (var dto in t)
-                domains.Add(MapToDomain(dto));
-            return domains;
-
-        }
-
+        
         public StationDto MapToDto(Station t)
         {
             if (t.Id == null)
@@ -55,13 +46,6 @@ namespace PSI_NET_CORE.Network.Mappers
                 County = t.County
             };
         }
-
-        public List<StationDto> MapToDtoList(List<Station> t)
-        {
-            var dtos = new List<StationDto>();
-            foreach (var domain in t)
-                dtos.Add(MapToDto(domain));
-            return dtos;
-        }
+        
     }
 }

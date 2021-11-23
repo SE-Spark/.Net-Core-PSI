@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace PSI_NET_CORE.Models
 {
-    public class Login
+    public class Register
     {
+
         [Required(ErrorMessage = "Username is required")]
         [DataType(DataType.Text)]
         [Display(Name = "Username No")]
@@ -17,5 +18,10 @@ namespace PSI_NET_CORE.Models
         [DataType(DataType.Text)]
         [Display(Name = "Password")]
         public String Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare(nameof(Password), ErrorMessage = "Password and confirm password did not match")]
+        public string confirmPswd { get; set; }
     }
 }

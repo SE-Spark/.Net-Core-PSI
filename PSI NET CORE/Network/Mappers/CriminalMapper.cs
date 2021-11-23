@@ -22,15 +22,6 @@ namespace PSI_NET_CORE.Network.Mappers
             };
         }
 
-        public List<Criminal> MapToDomainList(List<CriminalDto> t)
-        {
-            var domains =new List<Criminal>();
-            foreach (var dto in t)
-            {
-                domains.Add(MapToDomain(dto));
-            }
-            return domains;
-        }
 
         public CriminalDto MapToDto(Criminal t)
         {
@@ -54,15 +45,6 @@ namespace PSI_NET_CORE.Network.Mappers
                 CrimeDate = t.CrimeDate
             };
         }
-
-        public List<CriminalDto> MapToDtoList(List<Criminal> t)
-        {
-            var dtos = new List<CriminalDto>();
-            foreach(var domain in t)
-            {
-                dtos.Add(MapToDto(domain));
-            }
-            return dtos;
-        }
+        
     }
 }

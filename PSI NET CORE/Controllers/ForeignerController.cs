@@ -16,12 +16,27 @@ namespace PSI_NET_CORE.Controllers
         ForeignerMapper mapper = new ForeignerMapper();
         public ActionResult Index()
         {
+            var sess = HttpContext.Session.GetString(SessionManager.SessionUserName);
+            if (sess == null)
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
         public async Task<ActionResult> GetData()
         {
             var data = await unit.ForeignerRepository.get();
-           var foreigners= mapper.MapToDomainList(data);
+            var foreigners = (from t in data select new Foreigner
+            {
+                Id = t.Id.ToString(),
+                FirstName = t.FirstName,
+                LastName = t.LastName,
+                PassPortNo = t.PassPortNo,
+                City = t.City,
+                Country = t.Country,
+                DateIn = t.DateIn,
+                DateOut = t.DateOut
+            }).ToList();
             return Json(new { data = foreigners });
         }
         [HttpGet]
@@ -38,7 +53,7 @@ namespace PSI_NET_CORE.Controllers
         public IActionResult CreateUpdate(Foreigner t)
         {
             var input = mapper.MapToDto(t);
-            if (input.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 var output = unit.ForeignerRepository.insert(input);
                 if (output == 1)

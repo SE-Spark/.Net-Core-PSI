@@ -51,24 +51,6 @@ namespace PSI_NET_CORE.Network.Mappers
                 DateOut = t.DateOut
             };
         }
-        public List<Foreigner> MapToDomainList(List<ForeignerDto> Dtos)
-        {
-            var domains = new List<Foreigner>();
-            foreach (var dto in Dtos)
-            {
-                domains.Add(MapToDomain(dto));
-            }
-            return domains;
-        }
-        public List<ForeignerDto> MapToDtoList(List<Foreigner> domains)
-        {
-            var dtos = new List<ForeignerDto>();
-            foreach (var domain in domains)
-            {
-                dtos.Add(MapToDto(domain));
-            }
-            return dtos;
-        }
     }
 }
 

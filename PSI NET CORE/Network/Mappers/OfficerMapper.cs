@@ -21,15 +21,7 @@ namespace PSI_NET_CORE.Network.Mappers
                 DateEmployed=t.DateEmployed
             };
         }
-
-        public List<Officer> MapToDomainList(List<OfficerDto> t)
-        {
-            var domain = new List<Officer>();
-            foreach (var dto in t)
-                domain.Add(MapToDomain(dto));
-
-            return domain;
-        }
+        
 
         public OfficerDto MapToDto(Officer t)
         {
@@ -54,13 +46,6 @@ namespace PSI_NET_CORE.Network.Mappers
                 DateEmployed = t.DateEmployed
             };
         }
-
-        public List<OfficerDto> MapToDtoList(List<Officer> t)
-        {
-            var dtos = new List<OfficerDto>();
-            foreach (var domain in t)
-                dtos.Add(MapToDto(domain));
-            return dtos;
-        }
+        
     }
 }

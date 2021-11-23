@@ -17,14 +17,7 @@ namespace PSI_NET_CORE.Network.Mappers
                 Name=t.Name
             };
         }
-
-        public List<Work> MapToDomainList(List<WorkDto> t)
-        {
-            var domains = new List<Work>();
-            foreach (var dto in t)
-                domains.Add(MapToDomain(dto));
-            return domains;
-        }
+        
 
         public WorkDto MapToDto(Work t)
         {
@@ -39,13 +32,6 @@ namespace PSI_NET_CORE.Network.Mappers
                 Name = t.Name
             };
         }
-
-        public List<WorkDto> MapToDtoList(List<Work> t)
-        {
-            var dtos = new List<WorkDto>();
-            foreach (var domain in t)
-                dtos.Add(MapToDto(domain));
-            return dtos;
-        }
+        
     }
 }
