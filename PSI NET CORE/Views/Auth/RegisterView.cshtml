@@ -16,7 +16,7 @@
           rel="stylesheet" />
 </head>
 <body>
-    @using (Html.BeginForm("RegisterUser", "Auth", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+    @using (Html.BeginForm("RegisterUser", "Auth", FormMethod.Post))
     {
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="input-group mb-3">

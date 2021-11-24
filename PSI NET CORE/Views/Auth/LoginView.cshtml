@@ -16,7 +16,7 @@
           rel="stylesheet" />
 </head>
 <body>
-    @using (Html.BeginForm("LoginUser", "Auth", FormMethod.Post, new { onsubmit = "return SubmitUserLoginForm(this)" }))
+    @using (Html.BeginForm("LoginUser", "Auth", FormMethod.Post))
     {
         <div class="input-group mb-3">
             <div class="input-group-prepend">
