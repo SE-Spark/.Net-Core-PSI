@@ -42,8 +42,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+
 }
 .footer {
   position: absolute;
@@ -172,11 +173,4 @@ body {
         position: relative;
         margin-right: 0;
     }
-}
-body {
-    background: url('../lib/cover-photo.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }

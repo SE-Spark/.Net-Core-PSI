@@ -107,7 +107,7 @@ namespace PSI_NET_CORE.Network
         }
         public int insertUser(TEntity T)
         {
-            var url = Constants.BASE_URL + "lg/add";
+            var url = Constants.BASE_URL + "/lg/add";
             string data = JsonConvert.SerializeObject(T);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage res = _client.PostAsync(url, content).Result;
@@ -133,25 +133,25 @@ namespace PSI_NET_CORE.Network
             }
             return 0;
         }
-        public async Task<int> Validate(TEntity T)
+        public int Validate(TEntity T)
         {
-            var url = Constants.BASE_URL + "/lg/validate/";            
-                try
+            var url = Constants.BASE_URL + "/lg/validate/";
+            try
             {
                 string data = JsonConvert.SerializeObject(T);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage res = _client.PostAsync(url, content).Result;
-                    if (res.IsSuccessStatusCode)
-                    {
-                        var results = res.Content.ReadAsStringAsync().Result;
-                        var code= JsonConvert.DeserializeObject<int>(results);
-                    return code;
-                    }
-                }
-                catch (Exception ex)
+                if (res.IsSuccessStatusCode)
                 {
-                    await get();
+                    var results = res.Content.ReadAsStringAsync().Result;
+                    var code = JsonConvert.DeserializeObject<int>(results);
+                    return code;
                 }
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return 0;
         }

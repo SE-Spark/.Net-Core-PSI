@@ -2,144 +2,76 @@
 @{
     ViewData["Title"] = "login";
 }
+<html>
+<head>
+    <link href="~/css/Auth.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row justify-content-md-center mt-5 ">
+        <div class="col-5 mt-5 rounded" style="background-color:#D3D3D3">
+            <div class="text-center">Welcome To PSI</div>
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active"
+                       id="tab-login"
+                       data-mdb-toggle="pill"
+                       href="#pills-login"
+                       role="tab"
+                       aria-controls="pills-login"
+                       aria-selected="true">Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"
+                       id="tab-register"
+                       data-mdb-toggle="pill"
+                       href="#pills-register"
+                       role="tab"
+                       aria-controls="pills-register"
+                       aria-selected="false">Register</a>
+                </li>
+            </ul>
 
-<div class="row justify-content-md-center mt-5">
-    <div class="col-5 mt-5 rounded" style="background-color:#D3D3D3">
-        <div class="text-center">Welcome To PSI</div>
-        <!-- Pills navs -->
-        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active"
-                   id="tab-login"
-                   data-mdb-toggle="pill"
-                   href="#pills-login"
-                   role="tab"
-                   aria-controls="pills-login"
-                   aria-selected="true">Login</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link"
-                   id="tab-register"
-                   data-mdb-toggle="pill"
-                   href="#pills-register"
-                   role="tab"
-                   aria-controls="pills-register"
-                   aria-selected="false">Register</a>
-            </li>
-        </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active"
+                     id="pills-login"
+                     role="tabpanel"
+                     aria-labelledby="tab-login">
 
-        <div class="tab-content">
-            <div class="tab-pane fade show active"
-                 id="pills-login"
-                 role="tabpanel"
-                 aria-labelledby="tab-login">
-                <form id="loginForm" method="post">
+                </div>
+                <div class="tab-pane fade"
+                     id="pills-register"
+                     role="tabpanel"
+                     aria-labelledby="tab-register">
 
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <input type="text" name="Username" id="Username" class="form-control" required />
-                        <label class="form-label" for="Username">Email or username</label>
-                    </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                        <input type="password" name="password" id="password" class="form-control" required/>
-                        <label class="form-label" for="password">Password</label>
-                    </div>
-
-                    <!-- 2 column grid layout -->
-                    <div class="row mb-4">
-                        <div class="col-md-6 d-flex justify-content-center">
-                            <!-- Checkbox -->
-                            <div class="form-check mb-3 mb-md-0">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       value=""
-                                       id="loginCheck"
-                                       checked />
-                                <label class="form-check-label" for="loginCheck"> Remember me </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 d-flex justify-content-center">
-                            <!-- Simple link -->
-                            <a href="#!">Forgot password?</a>
-                        </div>
-                    </div>
-
-                    <!-- Submit button -->
-                    <button type="submit"  class="btn btn-primary btn-block mb-4">Sign in</button>
-
-
-                </form>
-            </div>
-            <div class="tab-pane fade"
-                 id="pills-register"
-                 role="tabpanel"
-                 aria-labelledby="tab-register">
-                <form id="registerForm" method="Post">
-
-                    <div class="form-outline mb-4">
-                        <input type="text" id="registerUsername" class="form-control" />
-                        <label class="form-label" for="registerUsername">Username</label>
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <input type="email" id="registerEmail" class="form-control" />
-                        <label class="form-label" for="registerEmail">Email</label>
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <input type="password" id="registerPassword" class="form-control" />
-                        <label class="form-label" for="registerPassword">Password</label>
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <input type="password" id="registerRepeatPassword" class="form-control" />
-                        <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      rel="stylesheet" />
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      rel="stylesheet" />
-<!-- MDB -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.css"
-      rel="stylesheet" />
-@section Scripts{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#loginForm").on("submit", function () {
-                var values = {};
-                $.each($('#loginForm').serializeArray(), function (i, field) {
-                    values[field.name] = field.value;
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.css"
+          rel="stylesheet" />
+    @section Scripts{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.0/mdb.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#pills-login").load("/Auth/LoginView");
+
+                $("#tab-register").on("click", function () {
+                    $("#pills-register").load("/Auth/RegisterView");
                 });
-                console.log(values);
-                $.ajax({
-                    type: "POST",
-                    url: "/Auth/LoginUser",
-                    data: values,
-                    success: function(data){
-                        if (data.success) {
-                            alert("success")
-                        }
-                        else {
-                            alert("failed")
-                        }
-                    }
-                })
             });
-        });
-    </script>
-}
+        </script>
+    }
 
+</body>
+</html>
