@@ -43,8 +43,15 @@ namespace PSI_NET_CORE.Controllers
                 if (response == 1)
                 {
                     HttpContext.Session.SetString(SessionManager.SessionUserName, l.Username);
+                    var message = HttpContext.Session.GetString(SessionManager.SessionUserName);
+                    if (message == null)
+                    {
+                        ViewData["message"] = "Login failed,could not set Session";
+                        return View("Index");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
+                ViewData["message"] = "Login failed, invalid credentials";
                 return View("Index");
             }
             return View("Index");
@@ -57,8 +64,16 @@ namespace PSI_NET_CORE.Controllers
                 if (response == 1)
                 {
                     HttpContext.Session.SetString(SessionManager.SessionUserName, lg.Username);
-                     return RedirectToAction("Index", "Home");
+
+                    var message = HttpContext.Session.GetString(SessionManager.SessionUserName);
+                    if (message == null)
+                    {
+                        ViewData["message"] = "Login failed,could not set Session";
+                        return View("Index");
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
+                ViewData["message"] = "Login failed, invalid credentials";
                 return View("Index");
             }
             return View("Index");
