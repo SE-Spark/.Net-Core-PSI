@@ -25,19 +25,19 @@ namespace PSI_NET_CORE.Models
         [Display(Name = "National ID")]
         public int NationalID { get; set; }
 
-        [Required(ErrorMessage = "Post Name is required")]
+        [Required(ErrorMessage = "Post Name ID is required")]
         [DataType(DataType.Text)]
         [Display(Name = "Post Name ID")]
         public int PostId { get; set; }
 
         [Required(ErrorMessage = "Work Type is required")]
         [DataType(DataType.Text)]
-        [Display(Name = "Designation/Work")]
+        [Display(Name = "Designation/Work ID")]
         public int WorkId { get; set; }
 
         [Required(ErrorMessage = "Date is required")]
         [DataType(DataType.Date)]
-        [Display(Name = "National ID")]
+        [Display(Name = "Date Employed")]
         public String DateEmployed { get; set; }
         //public String DateEmployed { get { return DateTime.Now.ToShortDateString(); } set => value }
     }

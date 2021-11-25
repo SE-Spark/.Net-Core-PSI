@@ -29,7 +29,7 @@ namespace PSI_NET_CORE.Models
         public String Description { get; set; }
 
         [Required(ErrorMessage = "Date is required")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.Date)]
         [Display(Name = "Date")]
         public String CrimeDate { get; set; }
 
