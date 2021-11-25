@@ -99,7 +99,7 @@
                     success: function (data) {
                         if (data.success) {
                             Popup.dialog('close');
-                            table.ajax.reload();
+                            dataTable.ajax.reload();
 
                             $.notify(data.message, {
                                 globalPosition: "top center",
