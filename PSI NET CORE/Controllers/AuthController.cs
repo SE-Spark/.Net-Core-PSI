@@ -46,14 +46,15 @@ namespace PSI_NET_CORE.Controllers
                     var message = HttpContext.Session.GetString(SessionManager.SessionUserName);
                     if (message == null)
                     {
-                        ViewData["message"] = "Login failed,could not set Session";
+                        ViewData["message"] = "Registration failed,could not set Session";
                         return View("Index");
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                ViewData["message"] = "Login failed, invalid credentials";
+                ViewData["message"] = "Registration failed, invalid credentials, user may exist with similar username";
                 return View("Index");
             }
+            ViewData["message"] = "Registration failed, empty fields or credentials mismatch";
             return View("Index");
         }
         public IActionResult LoginUser(Login lg)
